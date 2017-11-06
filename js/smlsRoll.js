@@ -2,13 +2,13 @@
  * smlsRoll  1.0.0
  * Author:  rwaiting
  * License: MIT
- * Date:    2017-11-01
+ * Date:    2017-11-06
  */
 ;(function (undefined) {
     'use strict';
     var smlsRoll = function (container, params) {
         var defaults = {
-            speed: 10,
+            speed: 30,
             direction: 'top',
             wrapper: 'rollWrapper',
             source: 'rollSource',
