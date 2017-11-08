@@ -42,7 +42,6 @@ var smlsroll = new smlsRoll(params);
 ```
 
 ## 2. Configuration
-Passing a configuration object to `ScrollReveal()` changes the defaults for all reveals, and passing `reveal()` a configuration object customizes that reveal set further.
 
 #### 2.1. Practical Example
 
