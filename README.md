@@ -48,7 +48,7 @@ Passing a configuration object to `ScrollReveal()` changes the defaults for all 
 
 ```js
 var smlsroll = new smlsRoll({
-		direction: 'bottom'
+    direction: 'bottom'
 });
 ```
 
