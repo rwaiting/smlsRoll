@@ -6,10 +6,11 @@
  */
 ;(function (undefined) {
     'use strict';
-    var smlsRoll = function (container, params) {
+    var smlsRoll = function (params) {
         var defaults = {
             speed: 30,
             direction: 'top',
+            container: 'rollContainer',
             wrapper: 'rollWrapper',
             source: 'rollSource',
             copy: 'rollCopy',
@@ -19,8 +20,7 @@
             boxLength: ''
         };
         this.params = this.extend(defaults, params, true);
-        this.params.container = container || 'rollContainer';
-        this.intTimer = [];
+        this.intTimer = 0;
         this._init();
     };
 
@@ -85,28 +85,28 @@
             }
 
             // 设置定时器
-            _this.intTimer[i] = setInterval(function () {
+            _this.intTimer = setInterval(function () {
                 _this._marquee(d)
             }, s.speed);
 
             // 鼠标悬停暂停
             c.onmouseover = function () {
-                clearInterval(_this.intTimer[i]);
+                clearInterval(_this.intTimer);
             };
 
             // 鼠标离开滚动
             c.onmouseout = function () {
                 if (_this.isEleInViewport(c)) {
-                    _this.intTimer[i] = setInterval(function () {
+                    _this.intTimer = setInterval(function () {
                         _this._marquee(d)
                     }, s.speed);
                 }
             };
 
             window.onscroll = function () {
-                clearInterval(_this.intTimer[i]);
+                clearInterval(_this.intTimer);
                 if (_this.isEleInViewport(c)) {
-                    _this.intTimer[i] = setInterval(function () {
+                    _this.intTimer = setInterval(function () {
                         _this._marquee(d)
                     }, s.speed);
                 }
@@ -211,14 +211,14 @@
         }
     };
 
-    window.smlsRoll = smlsRoll;
-
-    if (typeof(module) !== 'undefined') {
-        module.exports = window.smlsRoll;
-    } else if (typeof define === 'function' && define.amd) {
+    if (typeof module !== 'undefined' && typeof exports === 'object') {
+        module.exports = smlsRoll;
+    } else if (typeof define === 'function' && (define.amd || define.cmd)) {
         define([], function () {
             'use strict';
             return window.smlsRoll;
         });
+    } else {
+        window.smlsRoll = smlsRoll;
     }
 }());
