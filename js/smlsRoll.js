@@ -103,7 +103,9 @@
                 }
             };
 
-            window.onscroll = function () {
+            _this.addEventHandler(window, 'scroll', addScrollEvent);
+
+            function addScrollEvent() {
                 clearInterval(_this.intTimer);
                 if (_this.isEleInViewport(c)) {
                     _this.intTimer = setInterval(function () {
@@ -199,6 +201,22 @@
             a.appendChild(u);
             return u;
         },
+        addEventHandler: function (e, t, f) {
+            if (e.addEventListener) {
+                e.addEventListener(t, f);
+            } else {
+                e.attachEvent("on" + t, f);
+            }
+            return e;
+        },
+        removeEventHandler: function (e, t, f) {
+            if (e.removeEventListener) {
+                e.removeEventListener(t, f);
+            } else {
+                e.detachEvent("on" + t, f);
+            }
+            return e;
+        },
         isEleInViewport: function (e) {
             var r = e.getBoundingClientRect();
             var w = (window.innerWidth) || (document.documentElement.clientWidth);
@@ -209,7 +227,8 @@
                 (r.top >= 0 && r.top <= h && r.left >= 0 && r.left <= w) || (r.bottom >= 0 && r.bottom <= (h + eh) && r.right >= 0 && r.right <= (w + ew))
             );
         }
-    };
+    }
+    ;
 
     if (typeof module !== 'undefined' && typeof exports === 'object') {
         module.exports = smlsRoll;
